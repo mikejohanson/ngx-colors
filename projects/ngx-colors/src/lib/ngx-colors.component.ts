@@ -1,4 +1,4 @@
-import { Component, Host, OnInit, ChangeDetectorRef, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NgxColorsTriggerDirective } from './directives/ngx-colors-trigger.directive';
 import { NgStyle } from '@angular/common';
@@ -11,12 +11,10 @@ import { NgStyle } from '@angular/common';
     imports: [NgStyle]
 })
 export class NgxColorsComponent implements OnInit, OnDestroy {
-  private triggerDirectiveColorChangeSubscription: Subscription | null = null;
+  private cdRef = inject(ChangeDetectorRef);
+  private triggerDirective = inject(NgxColorsTriggerDirective, { host: true });
 
-  constructor(
-    private cdRef: ChangeDetectorRef,
-    @Host() private triggerDirective: NgxColorsTriggerDirective
-  ) {}
+  private triggerDirectiveColorChangeSubscription: Subscription | null = null;
 
   ngOnInit(): void {
     this.triggerDirectiveColorChangeSubscription =

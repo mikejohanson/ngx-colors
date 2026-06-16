@@ -1,16 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectorRef,
-  ViewChild,
-  ElementRef,
-  HostListener,
-  HostBinding,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, ViewChild, ElementRef, HostListener, HostBinding, ChangeDetectionStrategy, inject } from '@angular/core';
 import {
   trigger,
   transition,
@@ -73,6 +61,9 @@ import { NgxColorsComponent } from '../../ngx-colors.component';
     imports: [NgStyle, ColorPickerComponent, NgxColorsComponent]
 })
 export class PanelComponent implements OnInit {
+  service = inject(ConverterService);
+  private cdr = inject(ChangeDetectorRef);
+
   @HostListener('document:mousedown', ['$event'])
   click(event) {
     if (this.isOutside(event)) {
@@ -92,10 +83,6 @@ export class PanelComponent implements OnInit {
   @HostBinding('style.top.px') public top: number;
   @HostBinding('style.left.px') public left: number;
   @ViewChild('dialog') panelRef: ElementRef;
-  constructor(
-    public service: ConverterService,
-    private cdr: ChangeDetectorRef
-  ) {}
 
   public color = '#000000';
   public previewColor: string = '#000000';

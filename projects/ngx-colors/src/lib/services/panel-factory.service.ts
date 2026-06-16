@@ -1,27 +1,14 @@
-import {
-  Injectable,
-  ComponentFactoryResolver,
-  Injector,
-  Inject,
-  TemplateRef,
-  Type,
-  ComponentFactory,
-  ApplicationRef,
-  EmbeddedViewRef,
-  ComponentRef,
-  DOCUMENT
-} from "@angular/core";
+import { Injectable, ComponentFactoryResolver, Injector, TemplateRef, Type, ComponentFactory, ApplicationRef, EmbeddedViewRef, ComponentRef, DOCUMENT, inject } from "@angular/core";
 
 import { PanelComponent } from "../components/panel/panel.component";
 import { OVERLAY_STYLES } from "./overlay-styles";
 
 @Injectable()
 export class PanelFactoryService {
-  constructor(
-    private resolver: ComponentFactoryResolver,
-    private applicationRef: ApplicationRef,
-    private injector: Injector
-  ) {}
+  private resolver = inject(ComponentFactoryResolver);
+  private applicationRef = inject(ApplicationRef);
+  private injector = inject(Injector);
+
 
   componentRef: ComponentRef<PanelComponent>;
   _factory: ComponentFactory<PanelComponent>;

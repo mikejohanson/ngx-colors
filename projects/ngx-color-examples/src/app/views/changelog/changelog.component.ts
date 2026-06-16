@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy, inject } from "@angular/core";
 
 @Component({
     selector: "app-changelog-example",
@@ -8,7 +8,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
     changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ChangelogComponent implements OnInit {
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
+
   versions: Array<any>;
   ngOnInit() {
     this.http.get("/assets/changelog.json").subscribe((data: Array<any>) => {

@@ -1,18 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  AfterViewInit,
-  ViewChild,
-  ViewEncapsulation,
-  ElementRef,
-  ChangeDetectorRef,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-  ChangeDetectionStrategy
-} from "@angular/core";
+import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild, ViewEncapsulation, ElementRef, ChangeDetectorRef, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy, inject } from "@angular/core";
 
 import { Cmyk, Hsla, Hsva, Rgba } from "../../clases/formats";
 import { ColorFormats } from "../../enums/formats";
@@ -33,6 +19,9 @@ import { NgStyle } from "@angular/common";
 export class ColorPickerComponent
   implements OnInit, OnDestroy, AfterViewInit, OnChanges
 {
+  private service = inject(ConverterService);
+  private cdr = inject(ChangeDetectorRef);
+
   //IO color
   @Input() color: Hsva = new Hsva(0, 1, 1, 1);
   @Input() controls: "default" | "only-alpha" | "no-alpha" = "default";
@@ -55,11 +44,6 @@ export class ColorPickerComponent
 
   @ViewChild("hueSlider", { static: false }) hueSlider: ElementRef;
   @ViewChild("alphaSlider", { static: false }) alphaSlider: ElementRef;
-
-  constructor(
-    private service: ConverterService,
-    private cdr: ChangeDetectorRef
-  ) {}
 
   ngOnInit(): void {
     if (!this.color) {

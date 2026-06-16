@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  APP_ID,
-  AfterViewInit,
-  ChangeDetectionStrategy
-} from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, APP_ID, AfterViewInit, ChangeDetectionStrategy, inject } from "@angular/core";
 import { DomSanitizer } from "@angular/platform-browser";
 import { HttpClient } from "@angular/common/http";
 import { examples } from "./const/examples";
@@ -34,19 +26,17 @@ import { slideInAnimation } from "./const/router.animations";
     standalone: false
 })
 export class AppComponent implements OnInit {
+  domSanitizer = inject(DomSanitizer);
+  http = inject(HttpClient);
+  private contexts = inject(ChildrenOutletContexts);
+  private router = inject(Router);
+
   title = "ngx-color-examples";
   rightColor = "#42A5F5";
   leftColor = "#C0CA33";
   gradient;
 
   @ViewChild("tabmenu") menuView: ElementRef;
-
-  constructor(
-    public domSanitizer: DomSanitizer,
-    public http: HttpClient,
-    private contexts: ChildrenOutletContexts,
-    private router: Router
-  ) {}
 
   getRouteAnimationData() {
     return this.contexts.getContext("primary")?.route?.snapshot?.data?.[

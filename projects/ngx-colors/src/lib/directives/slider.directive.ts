@@ -1,7 +1,9 @@
-import { Input, Directive, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
+import { Input, Directive, Output, EventEmitter, HostListener, ElementRef, inject } from '@angular/core';
 
 @Directive({ selector: '[slider]' })
   export class SliderDirective {
+    private elRef = inject(ElementRef);
+
     private listenerMove: any;
     private listenerStop: any;
   
@@ -23,7 +25,7 @@ import { Input, Directive, Output, EventEmitter, HostListener, ElementRef } from
       this.start(event);
     }
   
-    constructor(private elRef: ElementRef) {
+    constructor() {
       this.listenerMove = (event: any) => this.move(event);
   
       this.listenerStop = () => this.stop();

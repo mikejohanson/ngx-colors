@@ -1,14 +1,4 @@
-import {
-  EventEmitter,
-  Input,
-  Output,
-  Directive,
-  ElementRef,
-  ComponentRef,
-  HostListener,
-  forwardRef,
-  OnDestroy,
-} from '@angular/core';
+import { EventEmitter, Input, Output, Directive, ElementRef, ComponentRef, HostListener, forwardRef, OnDestroy, inject } from '@angular/core';
 import { PanelFactoryService } from '../services/panel-factory.service';
 import { PanelComponent } from '../components/panel/panel.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -30,6 +20,10 @@ import { ColorFormats } from '../enums/formats';
 export class NgxColorsTriggerDirective
   implements ControlValueAccessor, OnDestroy
 {
+  private triggerRef = inject(ElementRef);
+  private panelFactory = inject(PanelFactoryService);
+  private service = inject(ConverterService);
+
   //Main input/output of the color picker
   // @Input() color = '#000000';
   // @Output() colorChange:EventEmitter<string> = new EventEmitter<string>();
@@ -65,11 +59,6 @@ export class NgxColorsTriggerDirective
   @HostListener('click') onClick() {
     this.openPanel();
   }
-  constructor(
-    private triggerRef: ElementRef,
-    private panelFactory: PanelFactoryService,
-    private service: ConverterService
-  ) {}
 
   panelRef: ComponentRef<PanelComponent>;
   isDisabled: boolean = false;

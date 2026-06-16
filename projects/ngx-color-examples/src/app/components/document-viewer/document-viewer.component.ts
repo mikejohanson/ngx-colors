@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { Highlight } from 'ngx-highlightjs';
@@ -11,10 +11,8 @@ import { Highlight } from 'ngx-highlightjs';
     imports: [MatTabGroup, MatTab, Highlight]
 })
 export class DocumentViewerComponent implements OnInit {
+  private http = inject(HttpClient);
 
-  constructor(
-    private http:HttpClient
-  ) { }
 
   @Input() documents;
 
