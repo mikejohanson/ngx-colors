@@ -1,11 +1,13 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { validColorValidator } from "../../../../../ngx-colors/src/public-api";
 
 @Component({
-  selector: "app-validator-example",
-  templateUrl: "./validator-example.component.html",
-  styleUrls: ["./validator-example.component.scss"],
+    selector: "app-validator-example",
+    templateUrl: "./validator-example.component.html",
+    styleUrls: ["./validator-example.component.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class ValidatorExampleComponent implements OnInit {
   constructor() {}

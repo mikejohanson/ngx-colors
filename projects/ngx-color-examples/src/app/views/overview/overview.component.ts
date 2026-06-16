@@ -1,12 +1,14 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { examples } from "../../const/examples";
 import { snippets } from "../../const/snippets";
 
 @Component({
-  selector: "app-overview-example",
-  templateUrl: "./overview.component.html",
-  styleUrls: ["./overview.component.scss"],
+    selector: "app-overview-example",
+    templateUrl: "./overview.component.html",
+    styleUrls: ["./overview.component.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class OverviewComponent {
   constructor() {}

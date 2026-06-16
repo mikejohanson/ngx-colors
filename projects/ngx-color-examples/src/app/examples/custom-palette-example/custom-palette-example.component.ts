@@ -1,10 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { NgxColorsColor } from "../../../../../ngx-colors/src/public-api";
 
 @Component({
-  selector: "app-custom-palette-example",
-  templateUrl: "./custom-palette-example.component.html",
-  styleUrls: ["./custom-palette-example.component.scss"],
+    selector: "app-custom-palette-example",
+    templateUrl: "./custom-palette-example.component.html",
+    styleUrls: ["./custom-palette-example.component.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class CustomPaletteExampleComponent {
   constructor() {}

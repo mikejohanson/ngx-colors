@@ -11,6 +11,7 @@ import {
   Output,
   EventEmitter,
   OnChanges,
+  ChangeDetectionStrategy
 } from "@angular/core";
 
 import { Cmyk, Hsla, Hsva, Rgba } from "../../clases/formats";
@@ -20,10 +21,12 @@ import { SliderDimension, SliderPosition } from "../../clases/slider";
 import { ConverterService } from "../../services/converter.service";
 
 @Component({
-  selector: "color-picker",
-  templateUrl: "./color-picker.component.html",
-  styleUrls: ["./color-picker.component.scss"],
-  encapsulation: ViewEncapsulation.None,
+    selector: "color-picker",
+    templateUrl: "./color-picker.component.html",
+    styleUrls: ["./color-picker.component.scss"],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class ColorPickerComponent
   implements OnInit, OnDestroy, AfterViewInit, OnChanges

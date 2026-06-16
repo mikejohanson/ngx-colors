@@ -1,10 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-document-viewer',
-  templateUrl: './document-viewer.component.html',
-  styleUrls: ['./document-viewer.component.scss']
+    selector: 'app-document-viewer',
+    templateUrl: './document-viewer.component.html',
+    styleUrls: ['./document-viewer.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class DocumentViewerComponent implements OnInit {
 

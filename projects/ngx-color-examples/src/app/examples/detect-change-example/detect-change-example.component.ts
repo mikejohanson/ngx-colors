@@ -1,18 +1,20 @@
 import { animate, style, transition, trigger } from "@angular/animations";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 
 @Component({
-  selector: "app-detect-change-example",
-  templateUrl: "./detect-change-example.component.html",
-  animations: [
-    trigger("inOutAnimation", [
-      transition(":enter", [
-        style({ background: "red" }),
-        animate("1s ease-out", style({})),
-      ]),
-    ]),
-  ],
-  styleUrls: ["./detect-change-example.style.scss"],
+    selector: "app-detect-change-example",
+    templateUrl: "./detect-change-example.component.html",
+    animations: [
+        trigger("inOutAnimation", [
+            transition(":enter", [
+                style({ background: "red" }),
+                animate("1s ease-out", style({})),
+            ]),
+        ]),
+    ],
+    styleUrls: ["./detect-change-example.style.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class DetectChangeExampleComponent {
   constructor() {}

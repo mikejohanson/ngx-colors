@@ -1,11 +1,13 @@
-import { Component, Host, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, Host, OnInit, ChangeDetectorRef, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NgxColorsTriggerDirective } from './directives/ngx-colors-trigger.directive';
 
 @Component({
-  selector: 'ngx-colors',
-  templateUrl: './ngx-colors.component.html',
-  styleUrls: ['./ngx-colors.component.scss'],
+    selector: 'ngx-colors',
+    templateUrl: './ngx-colors.component.html',
+    styleUrls: ['./ngx-colors.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class NgxColorsComponent implements OnInit, OnDestroy {
   private triggerDirectiveColorChangeSubscription: Subscription | null = null;

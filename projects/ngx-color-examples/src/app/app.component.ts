@@ -5,6 +5,7 @@ import {
   ElementRef,
   APP_ID,
   AfterViewInit,
+  ChangeDetectionStrategy
 } from "@angular/core";
 import { DomSanitizer } from "@angular/platform-browser";
 import { HttpClient } from "@angular/common/http";
@@ -25,10 +26,12 @@ import {
 } from "@angular/router";
 import { slideInAnimation } from "./const/router.animations";
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
-  animations: [slideInAnimation],
+    selector: "app-root",
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.scss"],
+    animations: [slideInAnimation],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class AppComponent implements OnInit {
   title = "ngx-color-examples";

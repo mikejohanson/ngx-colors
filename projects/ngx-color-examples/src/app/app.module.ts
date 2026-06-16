@@ -9,7 +9,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
-import { HttpClientModule, HttpClient } from "@angular/common/http";
+import { HttpClient, provideHttpClient, withInterceptorsFromDi, withXhr } from "@angular/common/http";
 import { HighlightModule, HIGHLIGHT_OPTIONS } from "ngx-highlightjs";
 import { CustomTriggerExampleComponent } from "./examples/custom-trigger-example/custom-trigger-example.component";
 import { DocumentViewerComponent } from "./components/document-viewer/document-viewer.component";
@@ -33,47 +33,40 @@ export function getHighlightLanguages() {
   };
 }
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    CustomTriggerExampleComponent,
-    DocumentViewerComponent,
-    HideElementsExampleComponent,
-    CustomPaletteExampleComponent,
-    ChangeAcceptLabelExampleComponent,
-    DetectChangeExampleComponent,
-    ValidatorExampleComponent,
-
-    //views
-    OverviewComponent,
-    ApiComponent,
-    ExamplesComponent,
-    ChangelogComponent,
-  ],
-  imports: [
-    HighlightModule,
-    BrowserModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    NgxColorsModule,
-    MatTabsModule,
-    FormsModule,
-    HttpClientModule,
-    MatInputModule,
-    MatSlideToggleModule,
-    MatIconModule,
-    MatButtonToggleModule,
-    MatButtonModule,
-  ],
-  providers: [
-    {
-      provide: HIGHLIGHT_OPTIONS,
-      useValue: {
-        languages: getHighlightLanguages(),
-      },
-    },
-  ],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [
+        AppComponent,
+        CustomTriggerExampleComponent,
+        DocumentViewerComponent,
+        HideElementsExampleComponent,
+        CustomPaletteExampleComponent,
+        ChangeAcceptLabelExampleComponent,
+        DetectChangeExampleComponent,
+        ValidatorExampleComponent,
+        //views
+        OverviewComponent,
+        ApiComponent,
+        ExamplesComponent,
+        ChangelogComponent,
+    ],
+    bootstrap: [AppComponent], imports: [HighlightModule,
+        BrowserModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        NgxColorsModule,
+        MatTabsModule,
+        FormsModule,
+        MatInputModule,
+        MatSlideToggleModule,
+        MatIconModule,
+        MatButtonToggleModule,
+        MatButtonModule], providers: [
+        {
+            provide: HIGHLIGHT_OPTIONS,
+            useValue: {
+                languages: getHighlightLanguages(),
+            },
+        },
+        provideHttpClient(withXhr(), withInterceptorsFromDi()),
+    ] })
 export class AppModule {}
