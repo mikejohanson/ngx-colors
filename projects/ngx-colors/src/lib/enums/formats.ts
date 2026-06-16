@@ -1,6 +1,6 @@
 export enum ColorFormats {
-    HEX,
-    RGBA,
-    HSLA,
-    CMYK
-  }
+  HEX,
+  RGBA,
+  HSLA,
+  CMYK
+}

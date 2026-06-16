@@ -1,25 +1,27 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
-import { PanelComponent } from './panel.component';
+import { PanelComponent } from './panel.component'
+import { ConverterService } from '../../services/converter.service'
+import { provideNoopAnimations } from '@angular/platform-browser/animations'
 
 describe('PanelComponent', () => {
-  let component: PanelComponent;
-  let fixture: ComponentFixture<PanelComponent>;
+  let component: PanelComponent
+  let fixture: ComponentFixture<PanelComponent>
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    imports: [PanelComponent]
-})
-    .compileComponents();
-  }));
+      imports: [PanelComponent],
+      providers: [ConverterService, provideNoopAnimations()]
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PanelComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(PanelComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

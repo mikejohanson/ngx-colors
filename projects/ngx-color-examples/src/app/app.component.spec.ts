@@ -1,33 +1,33 @@
-import { RouterModule } from '@angular/router';
-import { TestBed, waitForAsync } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import { RouterModule } from '@angular/router'
+import { TestBed, waitForAsync } from '@angular/core/testing'
+import { AppComponent } from './app.component'
 
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    imports: [
-    RouterModule
-],
-    declarations: [AppComponent],
-}).compileComponents();
-  }));
+      imports: [
+        RouterModule
+      ],
+      declarations: [AppComponent]
+    }).compileComponents()
+  }))
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  });
+    const fixture = TestBed.createComponent(AppComponent)
+    const app = fixture.debugElement.componentInstance
+    expect(app).toBeTruthy()
+  })
 
   it(`should have as title 'ngx-color-examples'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('ngx-color-examples');
-  });
+    const fixture = TestBed.createComponent(AppComponent)
+    const app = fixture.debugElement.componentInstance
+    expect(app.title).toEqual('ngx-color-examples')
+  })
 
   it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('ngx-color-examples app is running!');
-  });
-});
+    const fixture = TestBed.createComponent(AppComponent)
+    fixture.detectChanges()
+    const compiled = fixture.debugElement.nativeElement
+    expect(compiled.querySelector('.content span').textContent).toContain('ngx-color-examples app is running!')
+  })
+})

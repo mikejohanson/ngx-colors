@@ -1,5 +1,5 @@
 <div class="opened" [style]="positionString" #dialog>
-  @if (menu == 1) {
+  @if (menu === 1) {
     <div class="colors" [@colorsAnimation]="colorsAnimationEffect">
       @for (color of palette; track color; let i = $index) {
         <div class="circle wrapper color">
@@ -9,13 +9,13 @@
             [class.colornull]="!color"
             [ngStyle]="getBackgroundColor(color)"
             >
-            @if (i == this.indexSeleccionado) {
+            @if (i === this.indexSeleccionado) {
               <div class="selected"></div>
             }
           </div>
         </div>
       }
-      @if (!hideColorPicker && this.colorPickerControls != 'only-alpha') {
+      @if (!hideColorPicker && this.colorPickerControls !== 'only-alpha') {
         <div
           style="background: rgb(245 245 245); position: relative"
           (click)="addColor()"
@@ -50,7 +50,7 @@
         </div> -->
       </div>
     }
-    @if (!hideColorPicker && this.colorPickerControls == 'only-alpha') {
+    @if (!hideColorPicker && this.colorPickerControls === 'only-alpha') {
       <color-picker [controls]="colorPickerControls"
         [color]="hsva"
         (colorChange)="onChangeColorPicker($event)"
@@ -59,7 +59,7 @@
     }
   </div>
 }
-@if (menu == 2) {
+@if (menu === 2) {
   <div class="colors" [@colorsAnimation]="colorsAnimationEffect">
     <div class="circle wrapper">
       <div (click)="onClickBack()" class="add">
@@ -92,7 +92,7 @@
   }
 </div>
 }
-@if (menu == 3) {
+@if (menu === 3) {
   <div class="nav-wrapper">
     <div
       (click)="onClickBack()"

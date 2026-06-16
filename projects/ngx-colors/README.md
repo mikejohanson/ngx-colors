@@ -68,7 +68,6 @@ This library is composed of two parts:
   <ngx-colors
     ngx-colors-trigger
     style="display: inline-block; margin:5px;"
-    [formControl]="colorFormControl"
-  ></ngx-colors>
+    [formControl]="colorFormControl"></ngx-colors>
 </form>
 ```

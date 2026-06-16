@@ -29,10 +29,10 @@
 <div class="tab-wrapper" #tabmenu>
   <div class="sitios">
     <a href="https://github.com/KroneCorylus/ngx-colors"
-      ><img src="../assets/img/logos/GitHub_Logo.png"
+      ><img alt="GitHub" src="../assets/img/logos/GitHub_Logo.png"
     /></a>
     <a href="https://www.npmjs.com/package/ngx-colors"
-      ><img src="../assets/img/logos/npm-logo-red.svg"
+      ><img alt="npm" src="../assets/img/logos/npm-logo-red.svg"
     /></a>
   </div>
 
@@ -41,7 +41,7 @@
       <a
         mat-tab-link
         (click)="scrollIntoView()"
-        [active]="activeLink == link.url"
+        [active]="activeLink === link.url"
         [routerLink]="link.url"
         >
         {{ link.text }}

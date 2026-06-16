@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "esModuleInterop": true,
@@ -11,15 +10,12 @@
     "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
     "paths": {
       "ngx-colors": [
-        "dist/ngx-colors"
+        "./dist/ngx-colors"
       ],
       "ngx-colors/*": [
-        "dist/ngx-colors/*"
+        "./dist/ngx-colors/*"
       ]
     },
     "useDefineForClassFields": false
