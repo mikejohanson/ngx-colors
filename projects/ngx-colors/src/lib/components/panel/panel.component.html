@@ -51,12 +51,11 @@
       </div>
     }
     @if (!hideColorPicker && this.colorPickerControls == 'only-alpha') {
-      <color-picker
-        [controls]="colorPickerControls"
+      <color-picker [controls]="colorPickerControls"
         [color]="hsva"
         (colorChange)="onChangeColorPicker($event)"
         (onAlphaChange)="onAlphaChange($event)"
-      ></color-picker>
+       />
     }
   </div>
 }
@@ -121,11 +120,10 @@
   </div>
   <div class="color-picker-wrapper">
     <!-- <span [(colorPicker)]="color"></span> -->
-    <color-picker
-      [controls]="colorPickerControls"
+    <color-picker [controls]="colorPickerControls"
       [color]="hsva"
       (sliderChange)="onChangeColorPicker($event)"
-    ></color-picker>
+     />
   </div>
 }
 @if (!hideTextInput) {

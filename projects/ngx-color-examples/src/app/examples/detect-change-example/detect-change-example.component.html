@@ -1,15 +1,13 @@
 <div class="flex">
   <div class="flex center-content direction-column mr-2">
     <div class="flex center-content mb-2">
-      <ngx-colors
-        ngx-colors-trigger
+      <ngx-colors ngx-colors-trigger
         [(ngModel)]="color"
         (ngModelChange)="logEvent($event, 'ngModelChange')"
         (change)="logEvent($event, 'change')"
         (input)="logEvent($event, 'input')"
         (slider)="logEvent($event, 'slider')"
-        >
-      </ngx-colors>
+         />
       <div>{{ color }}</div>
     </div>
 

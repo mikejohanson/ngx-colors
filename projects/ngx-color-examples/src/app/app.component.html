@@ -2,27 +2,25 @@
   <div class="main-wrapper">
     <div class="title">ngx-colors</div>
     <div class="selector-wrapper">
-      <ngx-colors
-        ngx-colors-trigger
+      <ngx-colors ngx-colors-trigger
         (open)="log('open: ' + $event)"
         (close)="log('close: ' + $event)"
         (change)="updateGradient()"
         style="float: left"
         [(ngModel)]="leftColor"
-      ></ngx-colors>
+       />
       <div class="color">{{ leftColor }}</div>
       <div class="descripcion">Slide-In animations & Default palette</div>
     </div>
     <div class="selector-wrapper">
       <!-- <input type="text" [value]="rightColor" ngx-colors-trigger [(color)]="rightColor"> -->
-      <ngx-colors
-        ngx-colors-trigger
+      <ngx-colors ngx-colors-trigger
         (change)="updateGradient()"
         style="float: left"
         [(ngModel)]="rightColor"
         [colorsAnimation]="'popup'"
         [palette]="customPalette"
-      ></ngx-colors>
+       />
       <div class="color">{{ rightColor }}</div>
       <div class="descripcion">Popup animations & Custom palette</div>
     </div>
@@ -50,8 +48,8 @@
       </a>
     }
   </nav>
-  <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+  <mat-tab-nav-panel #tabPanel />
   <div [@routerTransition]="getRouteAnimationData()">
-    <router-outlet></router-outlet>
+    <router-outlet />
   </div>
 </div>
