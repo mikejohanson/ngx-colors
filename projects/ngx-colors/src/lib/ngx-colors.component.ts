@@ -1,14 +1,13 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NgxColorsTriggerDirective } from './directives/ngx-colors-trigger.directive';
-import { NgStyle } from '@angular/common';
+
 
 @Component({
     selector: 'ngx-colors',
     templateUrl: './ngx-colors.component.html',
     styleUrls: ['./ngx-colors.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [NgStyle]
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class NgxColorsComponent implements OnInit, OnDestroy {
   private cdRef = inject(ChangeDetectorRef);

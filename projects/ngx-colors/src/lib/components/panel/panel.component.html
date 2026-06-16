@@ -82,7 +82,7 @@
         [class.colornull]="!variant"
         (click)="changeColor(variant)"
         class="circle circle-border"
-        [ngStyle]="{ background: variant }"
+        [style.background]="variant"
         >
         @if (isSelected(variant)) {
           <div class="selected"></div>
