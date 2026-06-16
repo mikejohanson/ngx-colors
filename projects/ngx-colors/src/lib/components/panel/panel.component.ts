@@ -285,11 +285,11 @@ export class PanelComponent implements OnInit, AfterViewInit {
     return typeof color == 'string' && color.toUpperCase() == this.previewColor.toUpperCase()
   }
 
-  public getBackgroundColor(color: any) {
+  public getBackgroundColor(color: any): string {
     if (typeof color == 'string') {
-      return { background: color }
+      return color
     } else {
-      return { background: color?.preview }
+      return color?.preview
     }
   }
 

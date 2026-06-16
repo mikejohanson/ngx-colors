@@ -19,7 +19,6 @@ import { SliderDimension, SliderPosition } from '../../clases/slider'
 
 import { ConverterService } from '../../services/converter.service'
 import { SliderDirective } from '../../directives/slider.directive'
-import { NgStyle } from '@angular/common'
 
 @Component({
   selector: 'color-picker',
@@ -27,7 +26,7 @@ import { NgStyle } from '@angular/common'
   styleUrls: ['./color-picker.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [SliderDirective, NgStyle]
+  imports: [SliderDirective]
 })
 export class ColorPickerComponent implements OnInit, AfterViewInit, OnChanges {
   private service = inject(ConverterService)
@@ -103,10 +102,8 @@ export class ColorPickerComponent implements OnInit, AfterViewInit, OnChanges {
     this.sliderChange.emit(this.color)
   }
 
-  public getBackgroundColor(color: any) {
-    return {
-      background: 'linear-gradient(90deg, rgba(36,0,0,0) 0%, ' + color + ' 100%)'
-    }
+  public getBackgroundColor(color: any): string {
+    return 'linear-gradient(90deg, rgba(36,0,0,0) 0%, ' + color + ' 100%)'
   }
 
   private update(): void {

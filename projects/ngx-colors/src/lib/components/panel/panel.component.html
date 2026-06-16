@@ -7,7 +7,7 @@
             (click)="onColorClick(color)"
             class="circle color circle-border"
             [class.colornull]="!color"
-            [ngStyle]="getBackgroundColor(color)"
+            [style.background]="getBackgroundColor(color)"
             >
             @if (i === this.indexSeleccionado) {
               <div class="selected"></div>
@@ -32,7 +32,7 @@
             top: 0;
             right: 0;
           "
-              [ngStyle]="getBackgroundColor(color)"
+              [style.background]="getBackgroundColor(color)"
             ></div>
           }
           <svg
