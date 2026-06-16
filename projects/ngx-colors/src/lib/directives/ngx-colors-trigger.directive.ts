@@ -25,8 +25,7 @@ import { ColorFormats } from '../enums/formats';
             useExisting: forwardRef(() => NgxColorsTriggerDirective),
             multi: true,
         },
-    ],
-    standalone: false
+    ]
 })
 export class NgxColorsTriggerDirective
   implements ControlValueAccessor, OnDestroy

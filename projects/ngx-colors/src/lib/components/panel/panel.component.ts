@@ -28,6 +28,9 @@ import { formats } from '../../helpers/formats';
 import { NgxColorsTriggerDirective } from '../../directives/ngx-colors-trigger.directive';
 import { Hsva } from '../../clases/formats';
 import { NgxColorsColor } from '../../clases/color';
+import { NgStyle } from '@angular/common';
+import { ColorPickerComponent } from '../color-picker/color-picker.component';
+import { NgxColorsComponent } from '../../ngx-colors.component';
 
 @Component({
     selector: 'ngx-colors-panel',
@@ -67,7 +70,7 @@ import { NgxColorsColor } from '../../clases/color';
         ]),
     ],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [NgStyle, ColorPickerComponent, NgxColorsComponent]
 })
 export class PanelComponent implements OnInit {
   @HostListener('document:mousedown', ['$event'])

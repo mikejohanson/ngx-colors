@@ -5,8 +5,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
     selector: "app-changelog-example",
     templateUrl: "./changelog.component.html",
     styleUrls: ["./changelog.component.scss"],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ChangelogComponent implements OnInit {
   constructor(private http: HttpClient) {}

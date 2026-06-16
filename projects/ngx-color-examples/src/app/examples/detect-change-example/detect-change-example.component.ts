@@ -1,5 +1,9 @@
 import { animate, style, transition, trigger } from "@angular/animations";
 import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { NgxColorsComponent } from "../../../../../ngx-colors/src/lib/ngx-colors.component";
+import { NgxColorsTriggerDirective } from "../../../../../ngx-colors/src/lib/directives/ngx-colors-trigger.directive";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { MatButton } from "@angular/material/button";
 
 @Component({
     selector: "app-detect-change-example",
@@ -14,7 +18,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
     ],
     styleUrls: ["./detect-change-example.style.scss"],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [NgxColorsComponent, NgxColorsTriggerDirective, ReactiveFormsModule, FormsModule, MatButton]
 })
 export class DetectChangeExampleComponent {
   constructor() {}

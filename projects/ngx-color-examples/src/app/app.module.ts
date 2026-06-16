@@ -33,22 +33,7 @@ export function getHighlightLanguages() {
   };
 }
 
-@NgModule({ declarations: [
-        AppComponent,
-        CustomTriggerExampleComponent,
-        DocumentViewerComponent,
-        HideElementsExampleComponent,
-        CustomPaletteExampleComponent,
-        ChangeAcceptLabelExampleComponent,
-        DetectChangeExampleComponent,
-        ValidatorExampleComponent,
-        //views
-        OverviewComponent,
-        ApiComponent,
-        ExamplesComponent,
-        ChangelogComponent,
-    ],
-    bootstrap: [AppComponent], imports: [HighlightModule,
+@NgModule({ declarations: [AppComponent], bootstrap: [AppComponent], imports: [HighlightModule,
         BrowserModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
@@ -60,7 +45,18 @@ export function getHighlightLanguages() {
         MatSlideToggleModule,
         MatIconModule,
         MatButtonToggleModule,
-        MatButtonModule], providers: [
+        MatButtonModule, CustomTriggerExampleComponent,
+        DocumentViewerComponent,
+        HideElementsExampleComponent,
+        CustomPaletteExampleComponent,
+        ChangeAcceptLabelExampleComponent,
+        DetectChangeExampleComponent,
+        ValidatorExampleComponent,
+        //views
+        OverviewComponent,
+        ApiComponent,
+        ExamplesComponent,
+        ChangelogComponent], providers: [
         {
             provide: HIGHLIGHT_OPTIONS,
             useValue: {

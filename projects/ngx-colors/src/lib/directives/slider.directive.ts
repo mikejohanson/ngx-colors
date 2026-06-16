@@ -1,9 +1,6 @@
 import { Input, Directive, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
 
-@Directive({
-    selector: '[slider]',
-    standalone: false
-})
+@Directive({ selector: '[slider]' })
   export class SliderDirective {
     private listenerMove: any;
     private listenerStop: any;

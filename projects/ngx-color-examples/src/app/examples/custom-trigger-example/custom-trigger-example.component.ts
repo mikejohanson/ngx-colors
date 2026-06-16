@@ -1,11 +1,14 @@
 import { Component, ChangeDetectionStrategy } from "@angular/core";
+import { NgxColorsTriggerDirective } from "../../../../../ngx-colors/src/lib/directives/ngx-colors-trigger.directive";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { MatIcon } from "@angular/material/icon";
 
 @Component({
     selector: "app-custom-trigger-example",
     templateUrl: "./custom-trigger-example.component.html",
     styleUrls: ["./custom-trigger-example.component.scss"],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [NgxColorsTriggerDirective, ReactiveFormsModule, FormsModule, MatIcon]
 })
 export class CustomTriggerExampleComponent {
   constructor() {}
