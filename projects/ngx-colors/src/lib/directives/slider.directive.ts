@@ -7,10 +7,10 @@ export class SliderDirective {
   private listenerMove: any
   private listenerStop: any
 
-  readonly rgX = input.required<number>()
-  readonly rgY = input.required<number>()
+  readonly rgX = input<number>()
+  readonly rgY = input<number>()
 
-  readonly slider = input.required<string>()
+  readonly slider = input<string>()
 
   readonly dragEnd = output()
   readonly dragStart = output()
