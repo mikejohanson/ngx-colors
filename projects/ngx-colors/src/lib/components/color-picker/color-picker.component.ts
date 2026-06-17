@@ -2,16 +2,15 @@ import {
   Component,
   OnInit,
   AfterViewInit,
-  ViewChild,
   ViewEncapsulation,
   ElementRef,
   ChangeDetectorRef,
-  Input,
-  Output,
-  EventEmitter,
   OnChanges,
   ChangeDetectionStrategy,
-  inject
+  inject,
+  input,
+  output,
+  viewChild
 } from '@angular/core'
 
 import { Hsva } from '../../clases/formats'
@@ -33,10 +32,10 @@ export class ColorPickerComponent implements OnInit, AfterViewInit, OnChanges {
   private cdr = inject(ChangeDetectorRef)
 
   //IO color
-  @Input() color: Hsva = new Hsva(0, 1, 1, 1)
-  @Input() controls: 'default' | 'only-alpha' | 'no-alpha' = 'default'
-  @Output() sliderChange: EventEmitter<Hsva> = new EventEmitter<Hsva>(false)
-  @Output() onAlphaChange: EventEmitter<any> = new EventEmitter<any>(false)
+  readonly color = input<Hsva>(new Hsva(0, 1, 1, 1))
+  readonly controls = input<'default' | 'only-alpha' | 'no-alpha'>('default')
+  readonly sliderChange = output<Hsva>()
+  readonly onAlphaChange = output<any>()
   //Event triggered when any slider change
   // @Output() colorSelectedChange:EventEmitter<Hsva> = new EventEmitter<Hsva>(false);
 
@@ -52,26 +51,23 @@ export class ColorPickerComponent implements OnInit, AfterViewInit, OnChanges {
   public hueSliderColor!: string
   public alphaSliderColor!: string
 
-  @ViewChild('hueSlider', { static: false }) hueSlider!: ElementRef
-  @ViewChild('alphaSlider', { static: false }) alphaSlider!: ElementRef
+  readonly hueSlider = viewChild.required<ElementRef>('hueSlider')
+  readonly alphaSlider = viewChild.required<ElementRef>('alphaSlider')
 
   ngOnInit(): void {
-    if (!this.color) {
-      this.color = new Hsva(0, 1, 1, 1)
-    }
     this.slider = new SliderPosition(0, 0, 0, 0)
     this.update()
   }
 
   ngOnChanges(changes: any): void {
-    if (changes.color && this.color) {
+    if (changes.color && this.color()) {
       this.update()
     }
   }
 
   ngAfterViewInit(): void {
-    const hueWidth = this.hueSlider?.nativeElement.offsetWidth || 140
-    const alphaWidth = this.alphaSlider?.nativeElement.offsetWidth || 140
+    const hueWidth = this.hueSlider()?.nativeElement.offsetWidth || 140
+    const alphaWidth = this.alphaSlider()?.nativeElement.offsetWidth || 140
     this.sliderDimMax = new SliderDimension(hueWidth, 220, 130, alphaWidth)
     this.update()
   }
@@ -98,8 +94,7 @@ export class ColorPickerComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   setColor(color: any) {
-    this.color = color
-    this.sliderChange.emit(this.color)
+    this.sliderChange.emit(color)
   }
 
   public getBackgroundColor(color: any): string {
@@ -107,7 +102,7 @@ export class ColorPickerComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   private update(): void {
-    this.hsva = this.color
+    this.hsva = this.color()
     if (this.sliderDimMax) {
       const rgba = this.service.hsvaToRgba(this.hsva).denormalize()
       const hue = this.service.hsvaToRgba(new Hsva(this.hsva.h, 1, 1, 1)).denormalize()

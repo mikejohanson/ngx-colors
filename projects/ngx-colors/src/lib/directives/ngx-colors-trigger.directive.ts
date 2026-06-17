@@ -1,14 +1,13 @@
 import {
-  EventEmitter,
-  Input,
-  Output,
   Directive,
   ElementRef,
   ComponentRef,
   HostListener,
   forwardRef,
   OnDestroy,
-  inject
+  inject,
+  input,
+  output
 } from '@angular/core'
 import { PanelFactoryService } from '../services/panel-factory.service'
 import { PanelComponent } from '../components/panel/panel.component'
@@ -40,29 +39,37 @@ export class NgxColorsTriggerDirective implements ControlValueAccessor, OnDestro
   color = ''
 
   //This defines the type of animation for the palatte.(slide-in | popup)
-  @Input() colorsAnimation: 'slide-in' | 'popup' = 'slide-in'
+  readonly colorsAnimation = input<'slide-in' | 'popup'>(
+    'slide-in'
+    //This is used to set a custom palette of colors in the panel;
+  )
 
   //This is used to set a custom palette of colors in the panel;
-  @Input() palette!: string[] | NgxColorsColor[]
+  // These inputs are all optional (consumers may use the picker without them),
+  // so they must NOT be `input.required` or Angular throws NG0950 at runtime.
+  readonly palette = input<string[] | NgxColorsColor[]>()
 
-  @Input() format!: string
-  @Input() formats!: string[]
-  @Input() position: 'top' | 'bottom' = 'bottom'
-  @Input() hideTextInput!: boolean
-  @Input() hideColorPicker!: boolean
-  @Input() attachTo: string | undefined = undefined
-  @Input() overlayClassName: string | undefined = undefined
-  @Input() colorPickerControls: 'default' | 'only-alpha' | 'no-alpha' = 'default'
-  @Input() acceptLabel = 'ACCEPT'
-  @Input() cancelLabel = 'CANCEL'
+  readonly format = input<string>()
+  readonly formats = input<string[]>()
+  readonly position = input<'top' | 'bottom'>('bottom')
+  readonly hideTextInput = input<boolean>(false)
+  readonly hideColorPicker = input<boolean>(false)
+  readonly attachTo = input<string | undefined>(undefined)
+  readonly overlayClassName = input<string | undefined>(undefined)
+  readonly colorPickerControls = input<'default' | 'only-alpha' | 'no-alpha'>('default')
+  readonly acceptLabel = input('ACCEPT')
+  readonly cancelLabel = input(
+    'CANCEL'
+    // This event is trigger every time the selected color change
+  )
   // This event is trigger every time the selected color change
-  @Output() change: EventEmitter<string> = new EventEmitter<string>()
+  readonly change = output<string>()
   // This event is trigger every time the user change the color using the panel
-  @Output() input: EventEmitter<string> = new EventEmitter<string>()
+  readonly input = output<string>()
   // This event is trigger every time the user change the color using the panel
-  @Output() slider: EventEmitter<string> = new EventEmitter<string>()
-  @Output() close: EventEmitter<string> = new EventEmitter<string>()
-  @Output() open: EventEmitter<string> = new EventEmitter<string>()
+  readonly slider = output<string>()
+  readonly close = output<string>()
+  readonly open = output<string>()
 
   @HostListener('click') onClick() {
     this.openPanel()
@@ -82,21 +89,21 @@ export class NgxColorsTriggerDirective implements ControlValueAccessor, OnDestro
 
   public openPanel() {
     if (!this.isDisabled) {
-      this.panelRef = this.panelFactory.createPanel(this.attachTo, this.overlayClassName)
+      this.panelRef = this.panelFactory.createPanel(this.attachTo(), this.overlayClassName())
       this.panelRef.instance.iniciate(
         this,
         this.triggerRef,
         this.color,
-        this.palette,
-        this.colorsAnimation,
-        this.format,
-        this.hideTextInput,
-        this.hideColorPicker,
-        this.acceptLabel,
-        this.cancelLabel,
-        this.colorPickerControls,
-        this.position,
-        this.formats
+        this.palette(),
+        this.colorsAnimation(),
+        this.format(),
+        this.hideTextInput(),
+        this.hideColorPicker(),
+        this.acceptLabel(),
+        this.cancelLabel(),
+        this.colorPickerControls(),
+        this.position(),
+        this.formats()
       )
     }
     this.open.emit(this.color)
@@ -134,8 +141,9 @@ export class NgxColorsTriggerDirective implements ControlValueAccessor, OnDestro
 
   writeValue(value: any, previewColor = '') {
     if (value !== this.color) {
-      if (this.format) {
-        const format = formats.indexOf(this.format.toLowerCase())
+      const formatName = this.format()
+      if (formatName) {
+        const format = formats.indexOf(formatName.toLowerCase())
         value = this.service.stringToFormat(value, format)
       }
       this.color = value

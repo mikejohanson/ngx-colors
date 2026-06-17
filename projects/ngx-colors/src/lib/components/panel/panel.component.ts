@@ -2,13 +2,13 @@ import {
   Component,
   OnInit,
   ChangeDetectorRef,
-  ViewChild,
   ElementRef,
   HostListener,
   HostBinding,
   ChangeDetectionStrategy,
   inject,
-  AfterViewInit
+  AfterViewInit,
+  viewChild
 } from '@angular/core'
 import { trigger, transition, query, style, stagger, animate, keyframes } from '@angular/animations'
 import { ColorFormats } from '../../enums/formats'
@@ -97,7 +97,7 @@ export class PanelComponent implements OnInit, AfterViewInit {
 
   @HostBinding('style.top.px') public top!: number
   @HostBinding('style.left.px') public left!: number
-  @ViewChild('dialog') panelRef!: ElementRef
+  readonly panelRef = viewChild.required<ElementRef>('dialog')
 
   public color = '#000000'
   public previewColor = '#000000'
@@ -148,8 +148,9 @@ export class PanelComponent implements OnInit, AfterViewInit {
   private onScreenMovement() {
     this.setPosition()
     this.setPositionY()
-    if (!this.panelRef.nativeElement.style.transition) {
-      this.panelRef.nativeElement.style.transition = 'transform 0.5s ease-out'
+    const panelRef = this.panelRef()
+    if (!panelRef.nativeElement.style.transition) {
+      panelRef.nativeElement.style.transition = 'transform 0.5s ease-out'
     }
   }
 
@@ -183,7 +184,7 @@ export class PanelComponent implements OnInit, AfterViewInit {
     color: any,
     palette: any,
     animation: any,
-    format: string,
+    format: string | undefined,
     hideTextInput: boolean,
     hideColorPicker: boolean,
     acceptLabel: string,
@@ -250,11 +251,12 @@ export class PanelComponent implements OnInit, AfterViewInit {
   }
 
   private setPositionY(): void {
-    if (!this.TriggerBBox || !this.panelRef) {
+    const panelRef = this.panelRef()
+    if (!this.TriggerBBox || !panelRef) {
       return
     }
     const triggerBBox = this.TriggerBBox.nativeElement.getBoundingClientRect()
-    const panelBBox = this.panelRef.nativeElement.getBoundingClientRect()
+    const panelBBox = panelRef.nativeElement.getBoundingClientRect()
     const panelHeight = panelBBox.height
     // Check for space below the trigger
     if (triggerBBox.bottom + panelHeight > window.innerHeight) {

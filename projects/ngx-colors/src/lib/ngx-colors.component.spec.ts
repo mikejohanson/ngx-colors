@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core'
+import { Component, viewChild } from '@angular/core'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
 
@@ -13,7 +13,7 @@ import { NgxColorsModule } from './ngx-colors.module'
   imports: [NgxColorsModule]
 })
 class TestHostComponent {
-  @ViewChild(NgxColorsComponent) component!: NgxColorsComponent
+  readonly component = viewChild.required(NgxColorsComponent)
 }
 
 describe('NgxColorsComponent', () => {
@@ -32,6 +32,6 @@ describe('NgxColorsComponent', () => {
   })
 
   it('should create', () => {
-    expect(fixture.componentInstance.component).toBeTruthy()
+    expect(fixture.componentInstance.component()).toBeTruthy()
   })
 })

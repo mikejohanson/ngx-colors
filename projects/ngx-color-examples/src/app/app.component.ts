@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, ChangeDetectionStrategy, inject } from '@angular/core'
+import { Component, OnInit, ElementRef, ChangeDetectionStrategy, inject, viewChild } from '@angular/core'
 import { DomSanitizer } from '@angular/platform-browser'
 import { HttpClient } from '@angular/common/http'
 import { examples } from './const/examples'
@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   leftColor = '#C0CA33'
   gradient: any
 
-  @ViewChild('tabmenu') menuView!: ElementRef
+  readonly menuView = viewChild.required<ElementRef>('tabmenu')
 
   getRouteAnimationData() {
     return this.contexts.getContext('primary')?.route?.snapshot?.data?.['tabIndex']
@@ -100,7 +100,7 @@ export class AppComponent implements OnInit {
   }
 
   scrollIntoView() {
-    this.menuView.nativeElement.scrollIntoView({ behavior: 'smooth' })
+    this.menuView().nativeElement.scrollIntoView({ behavior: 'smooth' })
   }
 
   log(event: any) {
