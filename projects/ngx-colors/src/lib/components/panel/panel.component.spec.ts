@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { PanelComponent } from './panel.component'
 import { ConverterService } from '../../services/converter.service'
-import { provideNoopAnimations } from '@angular/platform-browser/animations'
 
 describe('PanelComponent', () => {
   let component: PanelComponent
@@ -11,7 +10,7 @@ describe('PanelComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [PanelComponent],
-      providers: [ConverterService, provideNoopAnimations()]
+      providers: [ConverterService]
     }).compileComponents()
   }))
 

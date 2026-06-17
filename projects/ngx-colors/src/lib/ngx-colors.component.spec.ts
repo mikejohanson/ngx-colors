@@ -1,6 +1,5 @@
 import { Component, viewChild } from '@angular/core'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { provideNoopAnimations } from '@angular/platform-browser/animations'
 
 import { NgxColorsComponent } from './ngx-colors.component'
 import { NgxColorsModule } from './ngx-colors.module'
@@ -21,8 +20,7 @@ describe('NgxColorsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [TestHostComponent],
-      providers: [provideNoopAnimations()]
+      imports: [TestHostComponent]
     }).compileComponents()
   }))
 

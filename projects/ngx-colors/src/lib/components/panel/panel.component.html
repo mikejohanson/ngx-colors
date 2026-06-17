@@ -1,8 +1,12 @@
 <div class="opened" [style]="positionString" #dialog>
   @if (menu === 1) {
-    <div class="colors" [@colorsAnimation]="colorsAnimationEffect">
+    <div class="colors">
       @for (color of palette; track color; let i = $index) {
-        <div class="circle wrapper color">
+        <div
+          class="circle wrapper color"
+          [animate.enter]="'animate-' + colorsAnimationEffect"
+          [style.animation-delay.ms]="i * 10"
+          >
           <div
             (click)="onColorClick(color)"
             class="circle color circle-border"
@@ -60,7 +64,7 @@
   </div>
 }
 @if (menu === 2) {
-  <div class="colors" [@colorsAnimation]="colorsAnimationEffect">
+  <div class="colors">
     <div class="circle wrapper">
       <div (click)="onClickBack()" class="add">
         <svg
@@ -76,8 +80,12 @@
       </svg>
     </div>
   </div>
-  @for (variant of variants; track variant) {
-    <div class="circle wrapper color">
+  @for (variant of variants; track variant; let i = $index) {
+    <div
+      class="circle wrapper color"
+      [animate.enter]="'animate-' + colorsAnimationEffect"
+      [style.animation-delay.ms]="i * 10"
+      >
       <div
         [class.colornull]="!variant"
         (click)="changeColor(variant)"
