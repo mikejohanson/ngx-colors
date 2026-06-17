@@ -1,12 +1,12 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
 
-import { PanelFactoryService } from './panel-factory.service';
+import { PanelFactoryService } from './panel-factory.service'
 
 describe('PanelFactoryServiceService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  beforeEach(() => TestBed.configureTestingModule({ providers: [PanelFactoryService] }))
 
   it('should be created', () => {
-    const service: PanelFactoryService = TestBed.get(PanelFactoryService);
-    expect(service).toBeTruthy();
-  });
-});
+    const service: PanelFactoryService = TestBed.inject(PanelFactoryService)
+    expect(service).toBeTruthy()
+  })
+})

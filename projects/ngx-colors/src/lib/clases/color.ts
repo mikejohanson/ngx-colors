@@ -1,10 +1,10 @@
 export class NgxColorsColor {
-  preview: string;
-  variants: Array<string>;
-  constructor(params?) {
+  preview!: string
+  variants!: string[]
+  constructor(params?: any) {
     if (params) {
-      this.preview = params.preview;
-      this.variants = params.variants;
+      this.preview = params.preview
+      this.variants = params.variants
     }
   }
 }

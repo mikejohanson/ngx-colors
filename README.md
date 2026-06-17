@@ -58,30 +58,19 @@ This library is composed of two parts:
 ##### Use it in your HTML template with ngModel:
 
 ```html
-<ngx-colors 
-  ngx-colors-trigger 
-  [(ngModel)]="color"
-></ngx-colors>
+<ngx-colors ngx-colors-trigger [(ngModel)]="color"></ngx-colors>
 ```
 
 You can select just one format:
 
 ```html
-<ngx-colors 
-  ngx-colors-trigger 
-  [(ngModel)]="color"
-  [format] = "'hex'"
-></ngx-colors>
+<ngx-colors ngx-colors-trigger [(ngModel)]="color" [format]="'hex'"></ngx-colors>
 ```
 
 Or you can choise some formats
 
 ```html
-<ngx-colors 
-  ngx-colors-trigger 
-  [(ngModel)]="color"
-  [formats]="['hex','cmyk']"
-></ngx-colors>
+<ngx-colors ngx-colors-trigger [(ngModel)]="color" [formats]="['hex','cmyk']"></ngx-colors>
 ```
 
 ##### Or with Reactive Forms:
@@ -91,7 +80,6 @@ Or you can choise some formats
   <ngx-colors
     ngx-colors-trigger
     style="display: inline-block; margin:5px;"
-    [formControl]="colorFormControl"
-  ></ngx-colors>
+    [formControl]="colorFormControl"></ngx-colors>
 </form>
 ```

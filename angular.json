@@ -15,7 +15,7 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "tsConfig": "projects/ngx-colors/tsconfig.lib.json",
             "project": "projects/ngx-colors/ng-package.json"
@@ -28,21 +28,27 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "main": "projects/ngx-colors/src/test.ts",
             "tsConfig": "projects/ngx-colors/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-colors/karma.conf.js"
+            "buildTarget": "ngx-colors:build",
+            "setupFiles": [
+              "projects/ngx-colors/src/test-setup.ts"
+            ],
+            "coverage": true,
+            "coverageReporters": [
+              "text",
+              "lcov"
+            ]
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ngx-colors/tsconfig.lib.json",
-              "projects/ngx-colors/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": [
+              "projects/ngx-colors/**/*.ts",
+              "projects/ngx-colors/**/*.html"
+            ]
           }
         }
       }
@@ -59,12 +65,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/ngx-color-examples",
+            "outputPath": {
+              "base": "dist/ngx-color-examples"
+            },
             "index": "projects/ngx-color-examples/src/index.html",
-            "main": "projects/ngx-color-examples/src/main.ts",
-            "polyfills": "projects/ngx-color-examples/src/polyfills.ts",
+            "polyfills": [
+              "projects/ngx-color-examples/src/polyfills.ts"
+            ],
             "tsConfig": "projects/ngx-color-examples/tsconfig.app.json",
             "assets": [
               "projects/ngx-color-examples/src/favicon.ico",
@@ -77,12 +86,11 @@
               "projects/ngx-color-examples/src/styles.scss"
             ],
             "scripts": [],
-            "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "browser": "projects/ngx-color-examples/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -97,8 +105,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -116,61 +122,41 @@
           "defaultConfiguration": ""
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "options": {
-            "browserTarget": "ngx-color-examples:build"
+            "buildTarget": "ngx-color-examples:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ngx-color-examples:build:production"
+              "buildTarget": "ngx-color-examples:build:production"
             }
           }
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular/build:extract-i18n",
           "options": {
-            "browserTarget": "ngx-color-examples:build"
+            "buildTarget": "ngx-color-examples:build"
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "main": "projects/ngx-color-examples/src/test.ts",
-            "polyfills": "projects/ngx-color-examples/src/polyfills.ts",
             "tsConfig": "projects/ngx-color-examples/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-color-examples/karma.conf.js",
-            "assets": [
-              "projects/ngx-color-examples/src/favicon.ico",
-              "projects/ngx-color-examples/src/assets"
-            ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/ngx-color-examples/src/styles.scss"
-            ],
-            "scripts": []
+            "buildTarget": "ngx-color-examples:build",
+            "coverage": true,
+            "coverageReporters": [
+              "text",
+              "lcov"
+            ]
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/ngx-color-examples/tsconfig.app.json",
-              "projects/ngx-color-examples/tsconfig.spec.json",
-              "projects/ngx-color-examples/e2e/tsconfig.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/ngx-color-examples/e2e/protractor.conf.js",
-            "devServerTarget": "ngx-color-examples:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "ngx-color-examples:serve:production"
-            }
+            "lintFilePatterns": [
+              "projects/ngx-color-examples/**/*.ts",
+              "projects/ngx-color-examples/**/*.html"
+            ]
           }
         }
       }
@@ -178,5 +164,31 @@
   },
   "cli": {
     "analytics": "f0a0278b-fd65-4730-b6cc-109b254781b5"
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
+    }
   }
 }

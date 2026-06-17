@@ -1,66 +1,61 @@
 import {
   Injectable,
-  ComponentFactoryResolver,
   Injector,
-  Inject,
-  TemplateRef,
-  Type,
-  ComponentFactory,
   ApplicationRef,
   EmbeddedViewRef,
   ComponentRef,
-} from "@angular/core";
-import { DOCUMENT } from "@angular/common";
-import { PanelComponent } from "../components/panel/panel.component";
-import { OVERLAY_STYLES } from "./overlay-styles";
+  EnvironmentInjector,
+  createComponent,
+  inject
+} from '@angular/core'
+
+import { PanelComponent } from '../components/panel/panel.component'
+import { OVERLAY_STYLES } from './overlay-styles'
 
 @Injectable()
 export class PanelFactoryService {
-  constructor(
-    private resolver: ComponentFactoryResolver,
-    private applicationRef: ApplicationRef,
-    private injector: Injector
-  ) {}
+  private applicationRef = inject(ApplicationRef)
+  private injector = inject(Injector)
+  private environmentInjector = inject(EnvironmentInjector)
 
-  componentRef: ComponentRef<PanelComponent>;
-  _factory: ComponentFactory<PanelComponent>;
-  overlay;
+  componentRef!: ComponentRef<PanelComponent>
+  overlay!: HTMLDivElement
 
-  createPanel(
-    attachTo: string | undefined,
-    overlayClassName: string | undefined
-  ): ComponentRef<PanelComponent> {
+  createPanel(attachTo: string | undefined, overlayClassName: string | undefined): ComponentRef<PanelComponent> {
     if (this.componentRef != undefined) {
-      this.removePanel();
+      this.removePanel()
     }
-    const factory: ComponentFactory<PanelComponent> =
-      this.resolver.resolveComponentFactory(PanelComponent);
 
-    this.componentRef = factory.create(this.injector);
-    this.applicationRef.attachView(this.componentRef.hostView);
-    const domElem = (this.componentRef.hostView as EmbeddedViewRef<any>)
-      .rootNodes[0] as HTMLElement;
+    this.componentRef = createComponent(PanelComponent, {
+      environmentInjector: this.environmentInjector,
+      elementInjector: this.injector
+    })
 
-    this.overlay = document.createElement("div");
-    this.overlay.id = "ngx-colors-overlay";
-    this.overlay.classList.add("ngx-colors-overlay");
-    this.overlay.classList.add(overlayClassName);
+    this.applicationRef.attachView(this.componentRef.hostView)
+    const domElem = (this.componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement
+
+    this.overlay = document.createElement('div')
+    this.overlay.id = 'ngx-colors-overlay'
+    this.overlay.classList.add('ngx-colors-overlay')
+    if (overlayClassName) {
+      this.overlay.classList.add(overlayClassName)
+    }
     Object.keys(OVERLAY_STYLES).forEach((attr: string) => {
-      this.overlay.style[attr] = OVERLAY_STYLES[attr];
-    });
+      ;(this.overlay.style as any)[attr] = (OVERLAY_STYLES as Record<string, any>)[attr]
+    })
     if (attachTo) {
-      document.getElementById(attachTo).appendChild(this.overlay);
+      document.getElementById(attachTo)?.appendChild(this.overlay)
     } else {
-      document.body.appendChild(this.overlay);
+      document.body.appendChild(this.overlay)
     }
-    this.overlay.appendChild(domElem);
+    this.overlay.appendChild(domElem)
 
-    return this.componentRef;
+    return this.componentRef
   }
 
   removePanel() {
-    this.applicationRef.detachView(this.componentRef.hostView);
-    this.componentRef.destroy();
-    this.overlay.remove();
+    this.applicationRef.detachView(this.componentRef.hostView)
+    this.componentRef.destroy()
+    this.overlay.remove()
   }
 }

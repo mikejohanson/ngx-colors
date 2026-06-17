@@ -1,1 +1,6 @@
-export const formats = ['hex','rgba','hsla', 'cmyk']
+export const formats = [
+  'hex',
+  'rgba',
+  'hsla',
+  'cmyk'
+]

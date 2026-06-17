@@ -1,12 +1,10 @@
 <div style="display:flex">
-    <ngx-colors 
-        ngx-colors-trigger 
+    <ngx-colors ngx-colors-trigger 
         [palette]="colorPalette" 
         [(ngModel)]="selectedColor" 
         [hideColorPicker]="true" 
         [hideTextInput]="true"
-    >
-    </ngx-colors>
+     />
     <span style="margin-left:10px;line-height: 33px;">
         Current Palette:{{colorPalette | json}}
     </span>
@@ -14,7 +12,7 @@
 
 <div style="display: flex;">
     <div style="margin:5px 10px 5px 0px">
-        <ngx-colors ngx-colors-trigger [(ngModel)]="colorToAdd"></ngx-colors></div>
+        <ngx-colors ngx-colors-trigger [(ngModel)]="colorToAdd" /></div>
     <div>
         <button mat-raised-button color="primary" (click)="addToPalette()">Add to palette</button>
     </div>

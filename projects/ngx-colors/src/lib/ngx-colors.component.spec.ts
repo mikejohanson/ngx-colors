@@ -1,25 +1,35 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { Component, viewChild } from '@angular/core'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
-import { NgxColorsComponent } from './ngx-colors.component';
+import { NgxColorsComponent } from './ngx-colors.component'
+import { NgxColorsModule } from './ngx-colors.module'
+
+// NgxColorsComponent injects NgxColorsTriggerDirective with `{ host: true }`, so it
+// must always be used together with the `ngx-colors-trigger` directive on the same
+// element. Test it through a host component that reflects real usage.
+@Component({
+  template: `<ngx-colors ngx-colors-trigger></ngx-colors>`,
+  imports: [NgxColorsModule]
+})
+class TestHostComponent {
+  readonly component = viewChild.required(NgxColorsComponent)
+}
 
 describe('NgxColorsComponent', () => {
-  let component: NgxColorsComponent;
-  let fixture: ComponentFixture<NgxColorsComponent>;
+  let fixture: ComponentFixture<TestHostComponent>
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ NgxColorsComponent ]
-    })
-    .compileComponents();
-  }));
+      imports: [TestHostComponent]
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NgxColorsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(TestHostComponent)
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(fixture.componentInstance.component()).toBeTruthy()
+  })
+})

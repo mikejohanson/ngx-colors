@@ -1,25 +1,24 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
-import { DocumentViewerComponent } from './document-viewer.component';
+import { DocumentViewerComponent } from './document-viewer.component'
 
 describe('DocumentViewerComponent', () => {
-  let component: DocumentViewerComponent;
-  let fixture: ComponentFixture<DocumentViewerComponent>;
+  let component: DocumentViewerComponent
+  let fixture: ComponentFixture<DocumentViewerComponent>
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DocumentViewerComponent ]
-    })
-    .compileComponents();
-  }));
+      imports: [DocumentViewerComponent]
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DocumentViewerComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(DocumentViewerComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
