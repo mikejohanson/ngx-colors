@@ -1,8 +1,8 @@
 {
-  "name": "ngx-colors",
+  "name": "@michael-johanson/ngx-colors",
   "version": "3.6.0",
   "license": "MIT",
-  "description": "A beautiful color picker for angular that let you choose from a color palette, using sliders (Hue, Lightness, Alpha sliders) or through text input(hex, rgba, hsla)",
+  "description": "A beautiful color picker for angular that let you choose from a color palette, using sliders (Hue, Lightness, Alpha sliders) or through text input(hex, rgba, hsla). Fork of ngx-colors updated for Angular 22.",
   "peerDependencies": {
     "@angular/common": ">=22.0.0",
     "@angular/core": ">=22.0.0",
@@ -11,9 +11,9 @@
   "author": "Krone",
   "repository": {
     "type": "git",
-    "url": "https://github.com/KroneCorylus/ngx-colors"
+    "url": "https://github.com/mikejohanson/ngx-colors"
   },
-  "homepage": "https://ngx-colors.web.app/",
+  "homepage": "https://github.com/mikejohanson/ngx-colors#readme",
   "keywords": [
     "ColorPicker",
     "Angular",
