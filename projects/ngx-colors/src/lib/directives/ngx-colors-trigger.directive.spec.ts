@@ -1,5 +1,5 @@
 import { NgxColorsTriggerDirective } from './ngx-colors-trigger.directive'
-import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core'
+import { ChangeDetectionStrategy, Component, provideZonelessChangeDetection, viewChild } from '@angular/core'
 import { NgxColorsModule } from '../ngx-colors.module'
 import { NgxColorsComponent } from '../ngx-colors.component'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -55,13 +55,12 @@ describe('NgxColorsTriggerDirective', () => {
 
     beforeEach(async () => {
       await TestBed.configureTestingModule({
-        providers: []
+        providers: [provideZonelessChangeDetection()]
       }).compileComponents()
 
       fixture = TestBed.createComponent(testHostComponent)
       hostComponent = fixture.componentInstance
       fixture.detectChanges()
-      hostComponent.component().ngOnInit()
       await waitForChanges(fixture)
     })
 
@@ -123,13 +122,12 @@ describe('NgxColorsTriggerDirective', () => {
 
     beforeEach(async () => {
       await TestBed.configureTestingModule({
-        providers: []
+        providers: [provideZonelessChangeDetection()]
       }).compileComponents()
 
       fixture = TestBed.createComponent(testHostComponent)
       hostComponent = fixture.componentInstance
       fixture.detectChanges()
-      hostComponent.component().ngOnInit()
       await waitForChanges(fixture)
     })
 
@@ -161,6 +159,10 @@ describe('NgxColorsTriggerDirective', () => {
   })
 
   async function waitForChanges(fixture: ComponentFixture<any>) {
+    // Zoneless: mutating a plain host property (e.g. the template-driven `color`
+    // field) doesn't mark the component dirty, so the update pass would skip it
+    // while the checkNoChanges pass still visits it -> NG0100. Mark it explicitly.
+    fixture.changeDetectorRef.markForCheck()
     fixture.detectChanges()
     await fixture.whenStable()
     fixture.detectChanges()

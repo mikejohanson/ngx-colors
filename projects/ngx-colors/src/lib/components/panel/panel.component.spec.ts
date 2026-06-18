@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
+import { provideZonelessChangeDetection } from '@angular/core'
 
 import { PanelComponent } from './panel.component'
 import { ConverterService } from '../../services/converter.service'
@@ -7,12 +8,12 @@ describe('PanelComponent', () => {
   let component: PanelComponent
   let fixture: ComponentFixture<PanelComponent>
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [PanelComponent],
-      providers: [ConverterService]
+      providers: [ConverterService, provideZonelessChangeDetection()]
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PanelComponent)

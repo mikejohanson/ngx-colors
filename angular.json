@@ -32,9 +32,6 @@
           "options": {
             "tsConfig": "projects/ngx-colors/tsconfig.spec.json",
             "buildTarget": "ngx-colors:build",
-            "setupFiles": [
-              "projects/ngx-colors/src/test-setup.ts"
-            ],
             "coverage": true,
             "coverageReporters": [
               "text",
@@ -71,9 +68,6 @@
               "base": "dist/ngx-color-examples"
             },
             "index": "projects/ngx-color-examples/src/index.html",
-            "polyfills": [
-              "projects/ngx-color-examples/src/polyfills.ts"
-            ],
             "tsConfig": "projects/ngx-color-examples/tsconfig.app.json",
             "assets": [
               "projects/ngx-color-examples/src/favicon.ico",

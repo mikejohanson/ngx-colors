@@ -1,4 +1,4 @@
-@import '../../shared/variables.scss';
+@use '../../shared/variables' as *;
 :host {
   position: fixed;
   z-index: 2001;

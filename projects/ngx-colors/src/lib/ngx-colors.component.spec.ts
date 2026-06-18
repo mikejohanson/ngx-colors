@@ -1,5 +1,5 @@
-import { Component, viewChild } from '@angular/core'
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
+import { Component, provideZonelessChangeDetection, viewChild } from '@angular/core'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { NgxColorsComponent } from './ngx-colors.component'
 import { NgxColorsModule } from './ngx-colors.module'
@@ -18,11 +18,12 @@ class TestHostComponent {
 describe('NgxColorsComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [TestHostComponent]
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [TestHostComponent],
+      providers: [provideZonelessChangeDetection()]
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent)

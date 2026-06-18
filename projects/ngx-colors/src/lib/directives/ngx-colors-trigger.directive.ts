@@ -7,7 +7,8 @@ import {
   OnDestroy,
   inject,
   input,
-  output
+  output,
+  signal
 } from '@angular/core'
 import { PanelFactoryService } from '../services/panel-factory.service'
 import { PanelComponent } from '../components/panel/panel.component'
@@ -36,7 +37,10 @@ export class NgxColorsTriggerDirective implements ControlValueAccessor, OnDestro
   // @Input() color = '#000000';
   // @Output() colorChange:EventEmitter<string> = new EventEmitter<string>();
 
-  color = ''
+  // Single source of truth for the selected color. The `ngx-colors` preview component
+  // and external `(change)` consumers both derive from this — keep it as a signal so the
+  // preview reacts to `writeValue` regardless of CVA/forms setup timing.
+  readonly color = signal('')
 
   //This defines the type of animation for the palatte.(slide-in | popup)
   readonly colorsAnimation = input<'slide-in' | 'popup'>(
@@ -93,7 +97,7 @@ export class NgxColorsTriggerDirective implements ControlValueAccessor, OnDestro
       this.panelRef.instance.iniciate(
         this,
         this.triggerRef,
-        this.color,
+        this.color(),
         this.palette(),
         this.colorsAnimation(),
         this.format(),
@@ -106,13 +110,13 @@ export class NgxColorsTriggerDirective implements ControlValueAccessor, OnDestro
         this.formats()
       )
     }
-    this.open.emit(this.color)
+    this.open.emit(this.color())
   }
 
   public closePanel() {
     this.panelFactory.removePanel()
     this.onTouchedCallback()
-    this.close.emit(this.color)
+    this.close.emit(this.color())
   }
 
   public setDisabledState(isDisabled: boolean): void {
@@ -131,7 +135,7 @@ export class NgxColorsTriggerDirective implements ControlValueAccessor, OnDestro
   }
 
   get value(): string {
-    return this.color
+    return this.color()
   }
 
   set value(value: string) {
@@ -140,13 +144,13 @@ export class NgxColorsTriggerDirective implements ControlValueAccessor, OnDestro
   }
 
   writeValue(value: any, previewColor = '') {
-    if (value !== this.color) {
+    if (value !== this.color()) {
       const formatName = this.format()
       if (formatName) {
         const format = formats.indexOf(formatName.toLowerCase())
         value = this.service.stringToFormat(value, format)
       }
-      this.color = value
+      this.color.set(value)
 
       let isCmyk = false
       if (value && value.startsWith('cmyk')) {
