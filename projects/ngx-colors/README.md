@@ -61,6 +61,18 @@ This library is composed of two parts:
 <ngx-colors ngx-colors-trigger [(ngModel)]="color"></ngx-colors>
 ```
 
+You can select just one format:
+
+```html
+<ngx-colors ngx-colors-trigger [(ngModel)]="color" [format]="'hex'"></ngx-colors>
+```
+
+Or you can choise some formats
+
+```html
+<ngx-colors ngx-colors-trigger [(ngModel)]="color" [formats]="['hex','cmyk']"></ngx-colors>
+```
+
 ##### Or with Reactive Forms:
 
 ```html
